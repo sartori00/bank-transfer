@@ -1,0 +1,42 @@
+{
+  "mappings": [
+      {
+      "request": {
+        "method": "GET",
+        "url": "/contas/41313d7b-bd75-4c75-9dea-1f4be434007f"
+      },
+      "response": {
+        "status": 200,
+        "body": "{ \"id\": \"41313d7b-bd75-4c75-9dea-1f4be434007f\", \"saldo\": 10.00, \"ativo\": true, \"limiteDiario\": 1000.00 }",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/contas/d0d32142-74b7-4aca-9c68-838aeacef96b"
+      },
+      "response": {
+        "status": 200,
+        "body": "{ \"id\": \"d0d32142-74b7-4aca-9c68-838aeacef96b\", \"saldo\": 5000.00, \"ativo\": true, \"limiteDiario\": 500.00 }",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "PUT",
+        "url": "/contas/saldos"
+      },
+      "response": {
+        "status": 204,
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    }
+  ]
+}
