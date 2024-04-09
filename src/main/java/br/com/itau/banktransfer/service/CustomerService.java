@@ -1,6 +1,5 @@
 package br.com.itau.banktransfer.service;
 
-
 import br.com.itau.banktransfer.client.customer.CustomerClient;
 import br.com.itau.banktransfer.client.customer.dto.CustomerResponseDto;
 import br.com.itau.banktransfer.exception.FallbackException;
@@ -34,6 +33,4 @@ public class CustomerService {
         log.error("[CustomerService] fallback Customer with customerId {}", customerId);
         throw new FallbackException(cause);
     }
-
-
 }
