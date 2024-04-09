@@ -2,11 +2,13 @@ package br.com.itau.banktransfer.service;
 
 import br.com.itau.banktransfer.api.dto.TransferRequestDto;
 import br.com.itau.banktransfer.api.dto.TransferResponseDto;
+import br.com.itau.banktransfer.event.NewTransactionSavedEvent;
 import br.com.itau.banktransfer.infrastructure.entity.Transaction;
 import br.com.itau.banktransfer.validation.ItemsForValidation;
 import br.com.itau.banktransfer.validation.ValidationRules;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,14 +22,17 @@ public class TransferProcessService {
     private final AccountService accountService;
     private final List<ValidationRules> validationRulesList;
     private final TransactionService transactionService;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Autowired
     public TransferProcessService(CustomerService customerService, AccountService accountService,
-                                  List<ValidationRules> validationRulesList, TransactionService transactionService) {
+                                  List<ValidationRules> validationRulesList, TransactionService transactionService,
+                                  ApplicationEventPublisher eventPublisher) {
         this.customerService = customerService;
         this.accountService = accountService;
         this.validationRulesList = validationRulesList;
         this.transactionService = transactionService;
+        this.eventPublisher = eventPublisher;
     }
 
     public TransferResponseDto processTransfer(TransferRequestDto dto) {
@@ -42,6 +47,9 @@ public class TransferProcessService {
 
         var transaction = transactionService.save(this.transactionBuilder(dto, idTransfer));
 
+        eventPublisher.publishEvent(new NewTransactionSavedEvent(this, transaction));
+
+        log.info("[TransferProcessService] Finished process transfer  {}", idTransfer);
         return new TransferResponseDto(idTransfer);
     }
 
@@ -62,4 +70,3 @@ public class TransferProcessService {
         return new ItemsForValidation(destinationCustomer, originAccount, dto, idTransfer);
     }
 }
-
