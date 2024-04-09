@@ -14,10 +14,12 @@ import java.util.UUID;
 public class TransferProcessService {
 
     private final CustomerService customerService;
+    private final AccountService accountService;
 
     @Autowired
-    public TransferProcessService(CustomerService customerService) {
+    public TransferProcessService(CustomerService customerService, AccountService accountService) {
         this.customerService = customerService;
+        this.accountService = accountService;
     }
 
     public TransferResponseDto processTransfer(TransferRequestDto dto) {
@@ -26,6 +28,7 @@ public class TransferProcessService {
         log.info("[TransferProcessService] Started process transfer  {}", idTransfer);
 
         var destinationCustomer = customerService.getCustomer(dto.destinationCustomerId());
+        var originAccount = accountService.getAccount(dto.account().originAccount());
 
         return new TransferResponseDto(idTransfer);
     }
