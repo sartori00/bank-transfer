@@ -24,4 +24,8 @@ public class TransactionService {
         return transactionSaved;
     }
 
+    public Transaction findByIdTransfer(String idTransfer) {
+        return repository.findByIdTransfer(idTransfer)
+                .orElseThrow();
+    }
 }
