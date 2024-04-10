@@ -43,7 +43,33 @@ $ cd bank-transfer
 
 Execute a aplicação na sua IDE por meio da classe BankTransferApplication.
 
-# Ao iniciar a Aplicação será criado um container no Docker com o MongoDB na porta 27017.
-# Será criado também um container no Docker com uma instância do wiremock com mocks dos microserviços que iremos nos utilizar.
-# A aplicação será aberta na porta:8080 - acesse http://localhost:8080
+# A aplicação será inicializada na porta: 8080 
 ```
+
+##### Ao executar a aplicação no profile "dev" será criado também:
+- Um container no Docker com o MongoDB na porta 27017.
+- Um container no Docker com uma instância de Wiremock com mocks dos microserviços que iremos nos utilizar.
+
+
+
+## 📄 Documentação da API (Swagger)
+
+A documentação da aplicação está disponível em: 
+
+```bash
+localhost:8080/swagger-ui/index.html
+```
+
+## 🛠 Tecnologias
+
+- Java 21
+- Maven
+- Lombok
+- Spring Boot 3.2.4
+- Spring OpenFeign
+- Spring Boot Docker Compose (apenas em dev)
+- Spring Validation
+- Spring Doc (Swagger) 2.5.0
+- Tomcat (Integrado ao Spring Boot)
+- MongoDB
+- Resilience4j
