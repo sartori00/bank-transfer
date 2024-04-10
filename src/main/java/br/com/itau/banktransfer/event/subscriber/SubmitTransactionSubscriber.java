@@ -23,7 +23,6 @@ public class SubmitTransactionSubscriber implements ApplicationListener<NewTrans
         this.transactionService = transactionService;
     }
 
-
     @Override
     public void onApplicationEvent(NewTransactionSavedEvent event) {
         log.info("[SubmitTransactionSubscriber] Subscriber SubmitTransaction heard TransactionSavedEvent {}", event.getTransaction().getIdTransfer());

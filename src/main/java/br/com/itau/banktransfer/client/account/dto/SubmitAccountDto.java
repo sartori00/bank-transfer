@@ -8,7 +8,6 @@ public record SubmitAccountDto(
         BigDecimal valor,
         AccountsDto conta
 ) {
-
     public SubmitAccountDto(Transaction transaction) {
         this(transaction.getAmount(), new AccountsDto(transaction));
     }

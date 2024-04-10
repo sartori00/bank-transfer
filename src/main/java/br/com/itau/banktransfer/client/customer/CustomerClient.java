@@ -12,5 +12,4 @@ public interface CustomerClient {
     @GetMapping("/{idCliente}")
     @Retry(name = "customer")
     CustomerResponseDto getCustomer(@PathVariable String idCliente);
-
 }

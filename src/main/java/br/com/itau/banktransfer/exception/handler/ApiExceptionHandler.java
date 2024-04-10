@@ -70,5 +70,4 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         log.error("[ApiExceptionHandler] - RateLimitException -> {}", error);
         return ResponseEntity.internalServerError().body(error);
     }
-
 }

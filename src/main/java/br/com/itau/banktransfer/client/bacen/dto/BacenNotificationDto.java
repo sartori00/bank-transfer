@@ -8,7 +8,6 @@ public record BacenNotificationDto(
         BigDecimal valor,
         NotificationAccountsDto conta
 ) {
-
     public BacenNotificationDto(Transaction transaction) {
         this(transaction.getAmount(), new NotificationAccountsDto(transaction));
     }

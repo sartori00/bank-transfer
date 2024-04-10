@@ -15,4 +15,5 @@ public record ProblemDto(
         @Schema(example = "2024-04-09T22:13:58Z")
         @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
         OffsetDateTime dateTime
-){ }
+) {
+}

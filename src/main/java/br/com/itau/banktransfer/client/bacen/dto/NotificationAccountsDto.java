@@ -6,7 +6,6 @@ public record NotificationAccountsDto(
         String idOrigem,
         String idDestino
 ) {
-
     public NotificationAccountsDto(Transaction transaction) {
         this(transaction.getOriginAccount(), transaction.getToAccount());
     }
