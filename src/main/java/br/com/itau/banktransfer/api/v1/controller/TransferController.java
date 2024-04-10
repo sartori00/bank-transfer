@@ -2,6 +2,7 @@ package br.com.itau.banktransfer.api.v1.controller;
 
 import br.com.itau.banktransfer.api.dto.TransferRequestDto;
 import br.com.itau.banktransfer.api.dto.TransferResponseDto;
+import br.com.itau.banktransfer.api.v1.openapi.TransferControllerOpenApi;
 import br.com.itau.banktransfer.service.TransferProcessService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/transfer")
-public class TransferController{
+public class TransferController implements TransferControllerOpenApi {
 
     private final TransferProcessService service;
 
@@ -27,3 +28,5 @@ public class TransferController{
         return ResponseEntity.ok(service.processTransfer(dto));
     }
 }
+
+
