@@ -37,6 +37,7 @@ public class SpringDocConfigurations {
                 ));
     }
 
+    @SuppressWarnings("rawtypes")
     private Map<String, Schema> generateSchemas() {
         final Map<String, Schema> schemaMap = new HashMap<>();
 
