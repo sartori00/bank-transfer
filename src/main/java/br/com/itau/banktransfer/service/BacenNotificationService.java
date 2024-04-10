@@ -5,6 +5,7 @@ import br.com.itau.banktransfer.client.bacen.dto.BacenNotificationDto;
 import br.com.itau.banktransfer.exception.FallbackException;
 import br.com.itau.banktransfer.exception.InvalidStatusException;
 import br.com.itau.banktransfer.exception.RateLimitException;
+import br.com.itau.banktransfer.infrastructure.entity.LaterRetry;
 import br.com.itau.banktransfer.infrastructure.entity.Transaction;
 import br.com.itau.banktransfer.infrastructure.entity.enums.TransactionStatus;
 import br.com.itau.banktransfer.util.ResponseMessages;
@@ -19,10 +20,12 @@ import org.springframework.stereotype.Service;
 public class BacenNotificationService {
 
     private final BacenClient bacenClient;
+    private final LaterRetryService laterRetryService;
 
     @Autowired
-    public BacenNotificationService(BacenClient bacenClient) {
+    public BacenNotificationService(BacenClient bacenClient, LaterRetryService laterRetryService) {
         this.bacenClient = bacenClient;
+        this.laterRetryService = laterRetryService;
     }
 
     @CircuitBreaker(name = "notify", fallbackMethod = "getNotifyFallback")
@@ -37,6 +40,8 @@ public class BacenNotificationService {
     }
 
     public void getNotifyFallback(Transaction transaction, Throwable cause){
+        laterRetryService.save(new LaterRetry(transaction.getIdTransfer()));
+
         if(cause instanceof FeignException.TooManyRequests) {
             log.error("[BacenNotificationService] Bacen API blocked this request due to Rate Limit, id: {}", transaction.getIdTransfer());
 
