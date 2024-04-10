@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 public interface RetryControllerOpenApi {
 
     @Operation(summary = "Manual activation of JOB attempts to send notification to BACEN")
-    @ApiResponse(responseCode = "200", content = @Content(mediaType = "application/json"))
+    @ApiResponse(responseCode = "204", content = @Content(mediaType = "application/json"))
     @ApiResponse(responseCode = "500", description = "InternalServerErrorResponse", content = @Content(mediaType = "application/json", schema = @Schema(ref = "ProblemDto")))
     ResponseEntity<?> retryScheduled();
 }

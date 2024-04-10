@@ -24,6 +24,6 @@ public class RetryController implements RetryControllerOpenApi {
     public ResponseEntity<?> retryScheduled(){
         service.retryScheduled();
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }
