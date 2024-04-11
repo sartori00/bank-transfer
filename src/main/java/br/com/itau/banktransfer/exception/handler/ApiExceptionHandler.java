@@ -24,7 +24,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request){
         var errors = ex.getFieldErrors();
-        log.error("[ApiExceptionHandler] - MethodArgumentNotValid -> {}", errors);
+        log.error("MethodArgumentNotValid -> {}", errors);
         return ResponseEntity.badRequest().body(errors.stream().map(ErrorsValidateData::new).toList());
     }
 
@@ -32,42 +32,42 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleHttpMessageNotReadable(
             HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         var error = ProblemDto.builder().message(ex.getMessage()).dateTime(OffsetDateTime.now()).build();
-        log.error("[ApiExceptionHandler] - HttpMessageNotReadable -> {}", error);
+        log.error("HttpMessageNotReadable -> {}", error);
         return ResponseEntity.internalServerError().body(error);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handle500Error(Exception ex) {
         var error = ProblemDto.builder().message("Error: " + ex.getLocalizedMessage()).dateTime(OffsetDateTime.now()).build();
-        log.error("[ApiExceptionHandler] - internalServerError -> {}", error);
+        log.error("internalServerError -> {}", error);
         return ResponseEntity.internalServerError().body(error);
     }
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<?> handleBusinessError(BusinessException ex){
         var error = ProblemDto.builder().message(ex.getMessage()).dateTime(OffsetDateTime.now()).build();
-        log.error("[ApiExceptionHandler] - BusinessError -> {}", error);
+        log.error("BusinessError -> {}", error);
         return ResponseEntity.badRequest().body(error);
     }
 
     @ExceptionHandler(FallbackException.class)
     public ResponseEntity<?> handleFallbackException(FallbackException ex){
         var error = ProblemDto.builder().message(ex.getMessage()).dateTime(OffsetDateTime.now()).build();
-        log.error("[ApiExceptionHandler] - FallbackException -> {}", error);
+        log.error("FallbackException -> {}", error);
         return ResponseEntity.internalServerError().body(error);
     }
 
     @ExceptionHandler(InvalidStatusException.class)
     public ResponseEntity<?> handleInvalidStatusException(InvalidStatusException ex){
         var error = ProblemDto.builder().message(ex.getMessage()).dateTime(OffsetDateTime.now()).build();
-        log.error("[ApiExceptionHandler] - InvalidStatusException -> {}", error);
+        log.error("InvalidStatusException -> {}", error);
         return ResponseEntity.internalServerError().body(error);
     }
 
     @ExceptionHandler(RateLimitException.class)
     public ResponseEntity<?> handleRateLimitException(RateLimitException ex){
         var error = ProblemDto.builder().message(ex.getMessage()).dateTime(OffsetDateTime.now()).build();
-        log.error("[ApiExceptionHandler] - RateLimitException -> {}", error);
+        log.error("RateLimitException -> {}", error);
         return ResponseEntity.internalServerError().body(error);
     }
 }

@@ -24,11 +24,11 @@ public class SubmitTransactionService {
     public void submitTransaction(Transaction transaction){
         client.submitTransaction(new SubmitAccountDto(transaction));
 
-        log.info("[SubmitTransactionService] Transaction was submitted successfully - {}", transaction.getIdTransfer());
+        log.info("Transaction was submitted successfully - {}", transaction.getIdTransfer());
     }
 
     public void getTransactionFallback(Transaction transaction, Throwable cause){
-        log.error("[SubmitTransactionService] fallback Transaction with id {}", transaction.getIdTransfer());
+        log.error("Fallback Transaction with id {}", transaction.getIdTransfer());
 
         throw new FallbackException(cause);
     }

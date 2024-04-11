@@ -17,7 +17,7 @@ public class BalanceAvailableValidation implements ValidationRules {
         var amountToTransfer = itemsForValidation.dto().amount();
 
         if(originAccount.saldo().compareTo(amountToTransfer) < 0){
-            log.error("[BalanceAvailableValidation] - There is no balance available in the account {} - {}",
+            log.error("There is no balance available in the account {} - {}",
                     originAccount.id(), itemsForValidation.idTransfer());
 
             throw new BusinessException(ResponseMessages.NO_BALANCE);

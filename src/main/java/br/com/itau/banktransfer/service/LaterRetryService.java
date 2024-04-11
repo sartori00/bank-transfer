@@ -23,7 +23,7 @@ public class LaterRetryService {
     public void save(LaterRetry laterRetry) {
         repository.save(laterRetry);
 
-        log.info("[LaterRetryService] - Save transaction {} for future retry", laterRetry.getIdTransfer());
+        log.info("Save transaction {} for future retry", laterRetry.getIdTransfer());
     }
 
     public List<LaterRetry> findPending(){
@@ -33,6 +33,6 @@ public class LaterRetryService {
     public void deleteAllOfThis(List<LaterRetry> pendingList) {
         pendingList.forEach(repository::delete);
 
-        log.info("[LaterRetryService] - Deleted all processed items");
+        log.info("Deleted all processed items");
     }
 }

@@ -30,7 +30,7 @@ public class AccountService {
             return new AccountResponseDto(accountId, false);
         }
 
-        log.error("[AccountService] fallback Account with accountId {}", accountId);
+        log.error("Fallback Account with accountId {}", accountId);
         throw new FallbackException(cause);
     }
 }

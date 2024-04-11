@@ -16,7 +16,7 @@ public class AccountIsActiveValidation implements ValidationRules {
         var originAccount = itemsForValidation.originAccount();
 
         if(!originAccount.ativo()){
-            log.error("[AccountIsActiveValidation] - Account {} Inactive or Not Found - {}", originAccount.id(),
+            log.error("Account {} Inactive or Not Found - {}", originAccount.id(),
                     itemsForValidation.idTransfer());
 
             throw new BusinessException(ResponseMessages.ACCOUNT_INACTIVE);

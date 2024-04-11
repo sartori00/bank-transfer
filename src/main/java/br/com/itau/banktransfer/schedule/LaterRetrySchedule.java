@@ -30,10 +30,10 @@ public class LaterRetrySchedule {
 
     @Scheduled(cron = "${schedule.later-retry-cron-pattern}")
     public void retryScheduled(){
-        log.info("[LaterRetrySchedule] - JOB - Started");
+        log.info("JOB - Started");
         List<LaterRetry> pendingList = laterRetryService.findPending();
 
-        log.info("[LaterRetrySchedule] - JOB - Found {} items to retry", pendingList.size());
+        log.info("JOB - Found {} items to retry", pendingList.size());
 
         if(!pendingList.isEmpty()){
             pendingList.forEach(item -> this.retry(item.getIdTransfer()));
@@ -41,7 +41,7 @@ public class LaterRetrySchedule {
             laterRetryService.deleteAllOfThis(pendingList);
         }
 
-        log.info("[LaterRetrySchedule] - JOB - Finished");
+        log.info("JOB - Finished");
     }
 
     private void retry(String idTransfer) {
@@ -49,7 +49,7 @@ public class LaterRetrySchedule {
             var transaction = transactionService.findByIdTransfer(idTransfer);
             bacenNotificationService.notify(transaction);
         } catch (NoSuchElementException e) {
-            log.warn("[LaterRetrySchedule] - JOB - idTransfer not found in transactions - {}", idTransfer);
+            log.warn("JOB - idTransfer not found in transactions - {}", idTransfer);
         }
     }
 }

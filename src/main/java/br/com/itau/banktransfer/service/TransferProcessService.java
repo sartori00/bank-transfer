@@ -38,18 +38,18 @@ public class TransferProcessService {
     public TransferResponseDto processTransfer(TransferRequestDto dto) {
         UUID idTransfer = UUID.randomUUID();
 
-        log.info("[TransferProcessService] Started process transfer  {}", idTransfer);
+        log.info("Started process transfer  {}", idTransfer);
 
         var itemsForValidation = this.getItemsForValidation(dto, idTransfer);
         validationRulesList.forEach(validationRule -> validationRule.valid(itemsForValidation));
 
-        log.info("[TransferProcessService] Rules Validated {}", idTransfer);
+        log.info("Rules Validated {}", idTransfer);
 
         var transaction = transactionService.save(this.transactionBuilder(dto, idTransfer));
 
         eventPublisher.publishEvent(new NewTransactionSavedEvent(this, transaction));
 
-        log.info("[TransferProcessService] Finished process transfer  {}", idTransfer);
+        log.info("Finished process transfer  {}", idTransfer);
         return new TransferResponseDto(idTransfer);
     }
 

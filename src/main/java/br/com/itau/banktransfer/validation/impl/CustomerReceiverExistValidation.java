@@ -16,7 +16,7 @@ public class CustomerReceiverExistValidation implements ValidationRules {
         var destinationCustomer = itemsForValidation.destinationCustomer();
 
         if(!destinationCustomer.exist()){
-            log.error("[CustomerReceiverExistValidation] - Customer {} not Found - {}", destinationCustomer.id(),
+            log.error("Customer {} not Found - {}", destinationCustomer.id(),
                     itemsForValidation.idTransfer());
 
             throw new BusinessException(ResponseMessages.CUSTOMER_NOT_FOUND);

@@ -17,7 +17,7 @@ public class DailyLimitValidation implements ValidationRules {
         var amountToTransfer = itemsForValidation.dto().amount();
 
         if(amountToTransfer.compareTo(originAccount.limiteDiario()) > 0 ) {
-            log.error("[DailyLimitValidation] - Daily transaction limit has been exceeded for account {} - {}",
+            log.error("Daily transaction limit has been exceeded for account {} - {}",
                     originAccount.id(), itemsForValidation.idTransfer());
 
             throw new BusinessException(ResponseMessages.TRANSACTION_LIMIT_EXCEEDED);

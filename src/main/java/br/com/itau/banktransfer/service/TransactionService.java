@@ -19,7 +19,7 @@ public class TransactionService {
 
     public Transaction save(Transaction transaction){
         var transactionSaved = repository.save(transaction);
-        log.info("[TransactionService] Transaction Saved on database {}", transactionSaved.getIdTransfer());
+        log.info("Transaction Saved on database {}", transactionSaved.getIdTransfer());
 
         return transactionSaved;
     }

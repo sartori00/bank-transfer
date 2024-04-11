@@ -30,7 +30,7 @@ public class BacenNotificationService {
 
     @CircuitBreaker(name = "notify", fallbackMethod = "getNotifyFallback")
     public void notify(Transaction transaction){
-        log.info("[BacenNotificationService] Started notification to Bacen {}", transaction.getIdTransfer());
+        log.info("Started notification to Bacen {}", transaction.getIdTransfer());
 
         if(!transaction.getStatus().equals(TransactionStatus.TRANSFERRED)) {
             throw new InvalidStatusException(ResponseMessages.TRANSACTION_IS_NOT_COMPLETED);
@@ -43,11 +43,11 @@ public class BacenNotificationService {
         laterRetryService.save(new LaterRetry(transaction.getIdTransfer()));
 
         if(cause instanceof FeignException.TooManyRequests) {
-            log.error("[BacenNotificationService] Bacen API blocked this request due to Rate Limit, id: {}", transaction.getIdTransfer());
+            log.error("Bacen API blocked this request due to Rate Limit, id: {}", transaction.getIdTransfer());
 
             throw new RateLimitException(ResponseMessages.RATE_LIMIT_BLOCKED);
         }
-        log.error("[BacenNotificationService] fallback Transaction with id {}", transaction.getIdTransfer());
+        log.error("Fallback Transaction with id {}", transaction.getIdTransfer());
 
         throw new FallbackException(cause);
     }

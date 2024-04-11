@@ -26,7 +26,7 @@ public class NotifyBacenSubscriber implements ApplicationListener<NewTransaction
 
     @Override
     public void onApplicationEvent(NewTransactionSavedEvent event) {
-        log.info("[NotifyBacenSubscriber] Subscriber NotifyBacen heard TransactionSavedEvent {}", event.getTransaction().getIdTransfer());
+        log.info("Subscriber NotifyBacen heard TransactionSavedEvent {}", event.getTransaction().getIdTransfer());
 
         var transaction = transactionService.findByIdTransfer(event.getTransaction().getIdTransfer());
 

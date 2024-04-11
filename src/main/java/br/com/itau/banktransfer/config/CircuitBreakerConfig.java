@@ -20,7 +20,7 @@ public class CircuitBreakerConfig {
             public void onEntryAddedEvent(EntryAddedEvent<CircuitBreaker> entryAddedEvent) {
                 entryAddedEvent.getAddedEntry()
                         .getEventPublisher()
-                        .onStateTransition(event -> log.info("[CircuitBreakerConfig] - {}", event));
+                        .onStateTransition(event -> log.info("{}", event));
             }
 
             @Override

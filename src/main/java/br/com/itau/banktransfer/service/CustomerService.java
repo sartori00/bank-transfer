@@ -30,7 +30,7 @@ public class CustomerService {
             return new CustomerResponseDto(customerId, false);
         }
 
-        log.error("[CustomerService] fallback Customer with customerId {}", customerId);
+        log.error("Fallback Customer with customerId {}", customerId);
         throw new FallbackException(cause);
     }
 }
