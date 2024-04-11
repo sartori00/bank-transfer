@@ -3,7 +3,7 @@
 # Desafio Engenharia de Software - Itaú
 
 ![](https://img.shields.io/badge/Autor-Rodrigo%20Sartori-brightgreen)
-![](https://img.shields.io/badge/Language-Java-brightgreen)
+![](https://img.shields.io/badge/Language-Java%2021-brightgreen)
 ![](https://img.shields.io/badge/Framework-Spring%20Boot-brightgreen)
 <br><br>
 ![GitHub Release Date](https://img.shields.io/badge/Release%20Date-Abril%202024-yellowgreen)
