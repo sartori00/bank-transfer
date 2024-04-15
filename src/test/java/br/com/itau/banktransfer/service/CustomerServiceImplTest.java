@@ -4,6 +4,7 @@ import br.com.itau.banktransfer.ConstantTimes;
 import br.com.itau.banktransfer.client.customer.CustomerClient;
 import br.com.itau.banktransfer.client.customer.dto.CustomerResponseDto;
 import br.com.itau.banktransfer.exception.FallbackException;
+import br.com.itau.banktransfer.service.impl.CustomerServiceImpl;
 import feign.FeignException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,13 +18,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CustomerServiceTest {
+class CustomerServiceImplTest {
 
     @Mock
     private CustomerClient customerClient;
 
     @InjectMocks
-    private CustomerService customerService;
+    private CustomerServiceImpl customerService;
 
     CustomerResponseDto expectedResponse;
     String customerId;

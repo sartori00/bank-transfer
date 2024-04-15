@@ -3,7 +3,7 @@ package br.com.itau.banktransfer.api.v1.controller;
 import br.com.itau.banktransfer.api.dto.AccountRequestDto;
 import br.com.itau.banktransfer.api.dto.TransferRequestDto;
 import br.com.itau.banktransfer.api.dto.TransferResponseDto;
-import br.com.itau.banktransfer.service.TransferProcessService;
+import br.com.itau.banktransfer.service.impl.TransferProcessServiceImpl;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class TransferControllerTest {
 
     @Mock
-    private TransferProcessService transferProcessService;
+    private TransferProcessServiceImpl transferProcessServiceImpl;
 
     @InjectMocks
     private TransferController transferController;
@@ -45,7 +45,7 @@ public class TransferControllerTest {
 
     @Test
     public void shouldCallProcessTransfer() {
-        when(transferProcessService.processTransfer(any(TransferRequestDto.class))).thenReturn(responseDto);
+        when(transferProcessServiceImpl.processTransfer(any(TransferRequestDto.class))).thenReturn(responseDto);
 
         var responseEntity = transferController.doTransfer(requestDto);
 

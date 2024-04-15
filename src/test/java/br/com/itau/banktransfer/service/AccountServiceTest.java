@@ -4,6 +4,7 @@ import br.com.itau.banktransfer.ConstantTimes;
 import br.com.itau.banktransfer.client.account.AccountClient;
 import br.com.itau.banktransfer.client.account.dto.AccountResponseDto;
 import br.com.itau.banktransfer.exception.FallbackException;
+import br.com.itau.banktransfer.service.impl.AccountServiceImpl;
 import feign.FeignException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,7 @@ class AccountServiceTest {
     private AccountClient accountClient;
 
     @InjectMocks
-    private AccountService accountService;
+    private AccountServiceImpl accountService;
 
     AccountResponseDto expectedResponse;
     String accountId;

@@ -9,6 +9,8 @@ import br.com.itau.banktransfer.exception.RateLimitException;
 import br.com.itau.banktransfer.infrastructure.entity.LaterRetry;
 import br.com.itau.banktransfer.infrastructure.entity.Transaction;
 import br.com.itau.banktransfer.infrastructure.entity.enums.RetryStatus;
+import br.com.itau.banktransfer.service.impl.BacenNotificationServiceImpl;
+import br.com.itau.banktransfer.service.impl.LaterRetryServiceImpl;
 import feign.FeignException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,16 +29,16 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class BacenNotificationServiceTest {
+class BacenNotificationServiceImplTest {
 
     @Mock
     private BacenClient bacenClient;
 
     @Mock
-    private LaterRetryService laterRetryService;
+    private LaterRetryServiceImpl laterRetryService;
 
     @InjectMocks
-    private BacenNotificationService bacenNotificationService;
+    private BacenNotificationServiceImpl bacenNotificationService;
 
     @Captor
     ArgumentCaptor<LaterRetry> laterRetryCaptor;

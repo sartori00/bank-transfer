@@ -3,6 +3,7 @@ package br.com.itau.banktransfer.service;
 import br.com.itau.banktransfer.ConstantTimes;
 import br.com.itau.banktransfer.infrastructure.entity.Transaction;
 import br.com.itau.banktransfer.infrastructure.repository.TransactionRepository;
+import br.com.itau.banktransfer.service.impl.TransactionServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,13 +21,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TransactionServiceTest {
+public class TransactionServiceImplTest {
 
     @Mock
     private TransactionRepository repository;
 
     @InjectMocks
-    private TransactionService service;
+    private TransactionServiceImpl service;
 
     private String idTransfer;
     private Transaction transaction;

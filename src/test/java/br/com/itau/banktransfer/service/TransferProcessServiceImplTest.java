@@ -4,6 +4,10 @@ import br.com.itau.banktransfer.ConstantTimes;
 import br.com.itau.banktransfer.api.dto.AccountRequestDto;
 import br.com.itau.banktransfer.api.dto.TransferRequestDto;
 import br.com.itau.banktransfer.infrastructure.entity.Transaction;
+import br.com.itau.banktransfer.service.impl.AccountServiceImpl;
+import br.com.itau.banktransfer.service.impl.CustomerServiceImpl;
+import br.com.itau.banktransfer.service.impl.TransactionServiceImpl;
+import br.com.itau.banktransfer.service.impl.TransferProcessServiceImpl;
 import br.com.itau.banktransfer.validation.ValidationRules;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,25 +27,25 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class TransferProcessServiceTest {
+class TransferProcessServiceImplTest {
 
     @Mock
-    private CustomerService customerService;
+    private CustomerServiceImpl customerService;
 
     @Mock
-    private AccountService accountService;
+    private AccountServiceImpl accountService;
 
     @Mock
     private List<ValidationRules> validationRulesList;
 
     @Mock
-    private TransactionService transactionService;
+    private TransactionServiceImpl transactionService;
 
     @Mock
     private ApplicationEventPublisher eventPublisher;
 
     @InjectMocks
-    private TransferProcessService transferProcessService;
+    private TransferProcessServiceImpl transferProcessServiceImpl;
 
     @Captor
     ArgumentCaptor<Transaction> transaction;
@@ -58,7 +62,7 @@ class TransferProcessServiceTest {
         when(transactionService.save(any())).thenReturn(new Transaction());
         doNothing().when(eventPublisher).publishEvent(any());
 
-        var responseDto = transferProcessService.processTransfer(dto);
+        var responseDto = transferProcessServiceImpl.processTransfer(dto);
 
         verify(customerService, times(ConstantTimes.ONLY_ONCE)).getCustomer(anyString());
         verify(accountService, times(ConstantTimes.ONLY_ONCE)).getAccount(anyString());
@@ -80,7 +84,7 @@ class TransferProcessServiceTest {
     void shouldThrowsExceptionWhenTransactionDoesNotInsertedInDatabase() {
         when(transactionService.save(any())).thenThrow(RuntimeException.class);
 
-        assertThrows(RuntimeException.class, () -> transferProcessService.processTransfer(dto));
+        assertThrows(RuntimeException.class, () -> transferProcessServiceImpl.processTransfer(dto));
         verify(validationRulesList, times(ConstantTimes.ONLY_ONCE)).forEach(any());
         verify(transactionService, times(ConstantTimes.ONLY_ONCE)).save(any());
         verifyNoInteractions(eventPublisher);

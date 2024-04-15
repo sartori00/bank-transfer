@@ -4,6 +4,7 @@ import br.com.itau.banktransfer.ConstantTimes;
 import br.com.itau.banktransfer.infrastructure.entity.LaterRetry;
 import br.com.itau.banktransfer.infrastructure.entity.enums.RetryStatus;
 import br.com.itau.banktransfer.infrastructure.repository.LaterRetryRepository;
+import br.com.itau.banktransfer.service.impl.LaterRetryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,13 +19,13 @@ import java.util.UUID;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class LaterRetryServiceTest {
+class LaterRetryServiceImplTest {
 
     @Mock
     private LaterRetryRepository repository;
 
     @InjectMocks
-    private LaterRetryService service;
+    private LaterRetryServiceImpl service;
 
     LaterRetry laterRetry;
     List<LaterRetry> pendingList;
