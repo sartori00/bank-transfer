@@ -3,20 +3,16 @@ package br.com.itau.banktransfer.service.impl;
 import br.com.itau.banktransfer.infrastructure.entity.Transaction;
 import br.com.itau.banktransfer.infrastructure.repository.TransactionRepository;
 import br.com.itau.banktransfer.service.TransactionService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository repository;
-
-    @Autowired
-    public TransactionServiceImpl(TransactionRepository repository) {
-        this.repository = repository;
-    }
 
     @Override
     public Transaction save(Transaction transaction){

@@ -4,22 +4,18 @@ import br.com.itau.banktransfer.infrastructure.entity.LaterRetry;
 import br.com.itau.banktransfer.infrastructure.entity.enums.RetryStatus;
 import br.com.itau.banktransfer.infrastructure.repository.LaterRetryRepository;
 import br.com.itau.banktransfer.service.LaterRetryService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class LaterRetryServiceImpl implements LaterRetryService {
 
     private final LaterRetryRepository repository;
-
-    @Autowired
-    public LaterRetryServiceImpl(LaterRetryRepository repository) {
-        this.repository = repository;
-    }
 
     @Override
     public void save(LaterRetry laterRetry) {

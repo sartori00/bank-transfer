@@ -13,22 +13,17 @@ import br.com.itau.banktransfer.service.LaterRetryService;
 import br.com.itau.banktransfer.util.ResponseMessages;
 import feign.FeignException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class BacenNotificationServiceImpl implements BacenNotificationService {
 
     private final BacenClient bacenClient;
     private final LaterRetryService laterRetryService;
-
-    @Autowired
-    public BacenNotificationServiceImpl(BacenClient bacenClient, LaterRetryService laterRetryService) {
-        this.bacenClient = bacenClient;
-        this.laterRetryService = laterRetryService;
-    }
 
     @Override
     @CircuitBreaker(name = "notify", fallbackMethod = "getNotifyFallback")

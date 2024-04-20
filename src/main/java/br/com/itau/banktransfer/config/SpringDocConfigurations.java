@@ -51,6 +51,4 @@ public class SpringDocConfigurations {
 
         return schemaMap;
     }
-
-
 }

@@ -6,20 +6,16 @@ import br.com.itau.banktransfer.exception.FallbackException;
 import br.com.itau.banktransfer.infrastructure.entity.Transaction;
 import br.com.itau.banktransfer.service.SubmitTransactionService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class SubmitTransactionServiceImpl implements SubmitTransactionService {
 
     private final AccountClient client;
-
-    @Autowired
-    public SubmitTransactionServiceImpl(AccountClient client) {
-        this.client = client;
-    }
 
     @Override
     @CircuitBreaker(name = "transaction", fallbackMethod = "getTransactionFallback")

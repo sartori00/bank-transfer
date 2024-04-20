@@ -6,20 +6,16 @@ import br.com.itau.banktransfer.exception.FallbackException;
 import br.com.itau.banktransfer.service.CustomerService;
 import feign.FeignException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerClient customerClient;
-
-    @Autowired
-    public CustomerServiceImpl(CustomerClient customerClient) {
-        this.customerClient = customerClient;
-    }
 
     @Override
     @CircuitBreaker(name = "customer", fallbackMethod = "getCustomerFallback")

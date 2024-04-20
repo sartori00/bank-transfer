@@ -4,8 +4,8 @@ import br.com.itau.banktransfer.infrastructure.entity.LaterRetry;
 import br.com.itau.banktransfer.service.BacenNotificationService;
 import br.com.itau.banktransfer.service.LaterRetryService;
 import br.com.itau.banktransfer.service.TransactionService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -14,19 +14,12 @@ import java.util.NoSuchElementException;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class LaterRetrySchedule {
 
     private final LaterRetryService laterRetryService;
     private final TransactionService transactionService;
     private final BacenNotificationService bacenNotificationService;
-
-    @Autowired
-    public LaterRetrySchedule(LaterRetryService laterRetryService, TransactionService transactionService,
-                              BacenNotificationService bacenNotificationService) {
-        this.laterRetryService = laterRetryService;
-        this.transactionService = transactionService;
-        this.bacenNotificationService = bacenNotificationService;
-    }
 
     @Scheduled(cron = "${schedule.later-retry-cron-pattern}")
     public void retryScheduled(){

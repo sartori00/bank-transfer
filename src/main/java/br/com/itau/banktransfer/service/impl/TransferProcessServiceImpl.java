@@ -10,8 +10,8 @@ import br.com.itau.banktransfer.service.TransactionService;
 import br.com.itau.banktransfer.service.TransferProcessService;
 import br.com.itau.banktransfer.validation.ItemsForValidation;
 import br.com.itau.banktransfer.validation.ValidationRules;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +20,7 @@ import java.util.UUID;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TransferProcessServiceImpl implements TransferProcessService {
 
     private final CustomerService customerService;
@@ -27,17 +28,6 @@ public class TransferProcessServiceImpl implements TransferProcessService {
     private final List<ValidationRules> validationRulesList;
     private final TransactionService transactionService;
     private final ApplicationEventPublisher eventPublisher;
-
-    @Autowired
-    public TransferProcessServiceImpl(CustomerService customerService, AccountService accountService,
-                                      List<ValidationRules> validationRulesList, TransactionService transactionService,
-                                      ApplicationEventPublisher eventPublisher) {
-        this.customerService = customerService;
-        this.accountService = accountService;
-        this.validationRulesList = validationRulesList;
-        this.transactionService = transactionService;
-        this.eventPublisher = eventPublisher;
-    }
 
     @Override
     public TransferResponseDto processTransfer(TransferRequestDto dto) {
@@ -74,5 +64,4 @@ public class TransferProcessServiceImpl implements TransferProcessService {
 
         return new ItemsForValidation(destinationCustomer, originAccount, dto, idTransfer);
     }
-
 }
