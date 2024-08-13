@@ -82,6 +82,7 @@ localhost:8080/swagger-ui/index.html
 
 ## 💡 Highlights do Desafio
 
+
 <span style="color:orange"><strong>1</strong></span><span style="color:#f0c665"> - Utilização de Docker Compose integrado 
 ao Start da aplicação para disponibilizar instâncias de MongoDB e Wiremock 
 (Em ambiente de desenvolvimento).</span>
